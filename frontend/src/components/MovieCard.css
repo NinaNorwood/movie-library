@@ -1,0 +1,7 @@
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: rosybrown;
+    margin: 5px
+}
