@@ -2,12 +2,12 @@ import {ChangeEvent, useState} from "react";
 
 
 type NewMovieProps = {
-    newMovie : (title:string, posterUrl:string, year:string) => void
+    newMovie : (title:string, posterURL:string, year:string) => void
 }
 export default function NewMovie(props : NewMovieProps) {
 
     const [title, setTitle] = useState("")
-    const [posterUrl, setPosterUrl] = useState("")
+    const [posterURL, setPosterUrl] = useState("")
     const [year, setYear] = useState("")
 
     const onTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +26,12 @@ export default function NewMovie(props : NewMovieProps) {
                 <input onChange={onTitleChange} value={title} />
             </label>
             <label>posterURL
-                <input onChange={onPosterUrlChange} value={posterUrl} />
+                <input onChange={onPosterUrlChange} value={posterURL} />
             </label>
             <label>Year
                 <input onChange={onYearChange} value={year} />
             </label>
-            <button onClick={() => props.newMovie(title,posterUrl,year)}>Add Book</button>
+            <button onClick={() => props.newMovie(title,posterURL,year)}>Add Book</button>
         </div>
 
     )

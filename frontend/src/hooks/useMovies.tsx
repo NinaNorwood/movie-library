@@ -18,10 +18,10 @@ export default function useMovies() {
             .catch(error => {console.error(error)})
     }
 
-    const addMovies = (title:string, posterUrl:string, year:string) => {
+    const addMovies = (title:string, posterURL:string, year:string) => {
         let newMovie = {
             title: title,
-            posterUrl: posterUrl,
+            posterURL: posterURL,
             year: year,
         }
         axios.post("/api/movie/", newMovie)

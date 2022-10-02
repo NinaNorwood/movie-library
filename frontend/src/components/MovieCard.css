@@ -1,7 +1,17 @@
 .movie-card {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background: rosybrown;
-    margin: 5px
+    background: royalblue;
+    margin: 5px;
+    border : 1px solid black;
+    border-radius: 5px;
+    width: 18rem;
+}
+
+img {
+    width: 16rem;
+    margin: 10px;
+
+}
+
+button {
+    margin: 15px;
 }

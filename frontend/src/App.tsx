@@ -11,11 +11,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+          <h1>Movie-Library</h1>
+          <MovieLibrary movies={movies} deleteMovie={deleteMovie}/>
           <div>
               {movies.length=== 0
                   && <h3>No movies available</h3>}
           </div>
-          <MovieLibrary movies={movies} deleteMovie={deleteMovie}/>
           <NewMovie newMovie={addMovies}/>
       </header>
     </div>

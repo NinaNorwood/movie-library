@@ -3,6 +3,6 @@
 export type Movie = {
     id: string;
     title: string;
-    posterUrl: string
+    posterURL: string
     year: string;
 }

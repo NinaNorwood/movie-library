@@ -38,28 +38,50 @@ class MovieServiceTest {
 
         verify(movieRepo).getAllMovies();
         assertEquals(expected, actual);
+    }
 
+    @Test
+    void getMovieById() {
+        //GIVEN
+        when(movieRepo.getMovieById("123")).thenReturn(new Movie("123", "Mustermovie", "http://picture.de", "2000"));
+
+        //WHEN
+        Movie actual = movieService.getMovieById("123");
+
+        //THEN
+        verify(movieRepo).getMovieById("123");
     }
 
     @Test
     void addMovie() {
         //GIVEN
-        MovieDTO dummyMovie = new MovieDTO("Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002");
+        MovieDTO movie1 = new MovieDTO("Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002");
         Movie expected = new Movie("123", "Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002");
         when(idService.generateID()).thenReturn("123");
         when(movieRepo.addMovie(any())).thenReturn(
                 Movie.builder()
                     .id("123")
-                    .title(dummyMovie.getTitle())
-                    .posterURL(dummyMovie.getPosterURL())
-                    .year(dummyMovie.getYear())
+                    .title(movie1.getTitle())
+                    .posterURL(movie1.getPosterURL())
+                    .year(movie1.getYear())
                    .build());
 
-
         //WHEN
-        Movie actual = movieService.addMovie(dummyMovie);
+        Movie actual = movieService.addMovie(movie1);
 
         //THEN
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void deleteMovie() {
+        //GIVEN
+        when(movieRepo.getMovieById("123")).thenReturn(new Movie("123", "Mustermovie", "http://picture.de", "2000"));
+
+        //WHEN
+        movieService.deleteMovie("123");
+
+        //THEN
+        verify(movieRepo).deleteMovie("123");
     }
 }
