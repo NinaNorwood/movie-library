@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,7 +24,7 @@ class MovieServiceTest {
     @Test
     void getAllMovies() {
         //GIVEN
-        when(movieRepo.getAllMovies()).thenReturn(
+        when(movieRepo.findAll()).thenReturn(
                 List.of(
                         new Movie("123", "Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002"),
                         new Movie("456", "Star Wars - The empire strikes back", "https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg", "1980")));
@@ -36,20 +37,20 @@ class MovieServiceTest {
                 new Movie("123", "Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002"),
                 new Movie("456", "Star Wars - The empire strikes back", "https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg", "1980"));
 
-        verify(movieRepo).getAllMovies();
+        verify(movieRepo).findAll();
         assertEquals(expected, actual);
     }
 
     @Test
     void getMovieById() {
         //GIVEN
-        when(movieRepo.getMovieById("123")).thenReturn(new Movie("123", "Mustermovie", "http://picture.de", "2000"));
+        when(movieRepo.findById("123")).thenReturn(new Optional<Movie> ("123", "Mustermovie", "http://picture.de", "2000"));
 
         //WHEN
-        Movie actual = movieService.getMovieById("123");
+        Optional<Movie> actual = movieService.getMovieById("123");
 
         //THEN
-        verify(movieRepo).getMovieById("123");
+        verify(movieRepo).findById("123");
     }
 
     @Test
@@ -58,7 +59,7 @@ class MovieServiceTest {
         MovieDTO movie1 = new MovieDTO("Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002");
         Movie expected = new Movie("123", "Lord of the Rings - The two towers", "http://cdn.shopify.com/s/files/1/0037/8008/3782/products/lord_of_the_rings_the_two_towers_NG06275_B_2_framed1-423634.jpg?v=1611688137", "2002");
         when(idService.generateID()).thenReturn("123");
-        when(movieRepo.addMovie(any())).thenReturn(
+        when(movieRepo.save(any())).thenReturn(
                 Movie.builder()
                     .id("123")
                     .title(movie1.getTitle())
@@ -76,12 +77,12 @@ class MovieServiceTest {
     @Test
     void deleteMovie() {
         //GIVEN
-        when(movieRepo.getMovieById("123")).thenReturn(new Movie("123", "Mustermovie", "http://picture.de", "2000"));
+        when(movieRepo.findById("123")).thenReturn(new Movie("123", "Mustermovie", "http://picture.de", "2000"));
 
         //WHEN
         movieService.deleteMovie("123");
 
         //THEN
-        verify(movieRepo).deleteMovie("123");
+        verify(movieRepo).deleteById("123");
     }
 }

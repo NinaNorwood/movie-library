@@ -1,14 +1,17 @@
 package de.neuefische.backend.repository;
 
 import de.neuefische.backend.model.Movie;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
-public class MovieRepo {
+public interface MovieRepo extends MongoRepository<Movie, String> {
 
-    Map<String, Movie> movies = new HashMap<>();
+
+
+   /* Map<String, Movie> movies = new HashMap<>();
 
     public List<Movie> getAllMovies() {
         return new ArrayList<>(movies.values());
@@ -26,6 +29,6 @@ public class MovieRepo {
 
     public Movie deleteMovie(String id) {
         return movies.remove(id);
-    }
+    }*/
 
 }

@@ -1,7 +1,7 @@
 import {Movie} from "./Movie";
 import MovieCard from "./MovieCard";
 import "./MovieLibrary.css"
-import {useState} from "react";
+import React, {useState} from "react";
 import NewMovie from "./NewMovie";
 
 
@@ -27,6 +27,10 @@ export default function MovieLibrary(props : MovieLibraryProps) {
             <div className="movie-library">
                  {result.map((movie) =>
                     <MovieCard movie={movie} deleteMovie={props.deleteMovie}/>)}
+            </div>
+            <div>
+                {props.movies.length <1
+                    && <h3>No movies available</h3>}
             </div>
         </div>
     )
