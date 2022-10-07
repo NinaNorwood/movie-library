@@ -2,27 +2,27 @@ name: Deploy to Heroku
 on:
   push:
     branches:
-      -test
+      - master
 
-  jobs:
-    build-frontend:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-        - name: Build Frontend
-          run: |
-            cd frontend
-            npm install
-            npm run build
-        - uses: action/upload-artifact@v2
-          with:
-            name: frontend-build
-            path: frontend/build/
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Build Frontend
+        run:
+          cd frontend
+          npm install
+          npm run build
+      - uses: action/upload-artifact@v2
+        with:
+          name: frontend-build
+          path: frontend/build/
 
-    build-backend:
+  build-backend:
       runs-on: ubuntu-latest
       needs: build-frontend
       steps:
@@ -42,7 +42,7 @@ on:
             name: backend-build
             path: backend/target/movie-library.jar
 
-    deploy:
+  deploy:
       runs-on: ubuntu-latest
       needs: build-backend
       env:
