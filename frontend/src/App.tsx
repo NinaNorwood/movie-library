@@ -1,23 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import useMovies from "./hooks/useMovies";
+import MovieLibrary from "./components/MovieLibrary";
+import NewMovie from "./components/NewMovie";
 
 function App() {
+
+    const {movies, addMovies, deleteMovie} = useMovies();
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          <h1>Movie-Library</h1>
+          <MovieLibrary movies={movies} deleteMovie={deleteMovie}/>
+          <NewMovie newMovie={addMovies}/>
       </header>
     </div>
   );
