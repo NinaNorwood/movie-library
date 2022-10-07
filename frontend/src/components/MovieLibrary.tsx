@@ -2,7 +2,6 @@ import {Movie} from "./Movie";
 import MovieCard from "./MovieCard";
 import "./MovieLibrary.css"
 import React, {useState} from "react";
-import NewMovie from "./NewMovie";
 
 
 type MovieLibraryProps = {
