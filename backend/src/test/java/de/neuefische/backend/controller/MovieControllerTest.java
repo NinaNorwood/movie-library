@@ -1,6 +1,5 @@
 package de.neuefische.backend.controller;
 
-
 import de.neuefische.backend.model.Movie;
 import de.neuefische.backend.repository.MovieRepo;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MovieControllerTest {
+class MovieControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -57,4 +56,29 @@ public class MovieControllerTest {
                 .andExpect(content().string("""
                         {"id":"456","title":"Star Wars - The empire strikes back","posterURL":"https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg","year":"1980"}"""));
     }*/
+
+    @DirtiesContext
+    @Test
+    void getMovie_whenMovieDoesntExist() throws Exception {
+        //GIVEN
+
+        //WHEN &THEN
+        mockMvc.perform(get("/api/movie/123456"))
+                .andExpect(status().is(200))
+                .andExpect(content().string("""
+                        [{"id":"456","title":"Star Wars - The empire strikes back","posterURL":"https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg","year":"1980"}]"""));
+    }
+
+
+    @DirtiesContext
+    @Test
+    void addMovie_whenMissingName() throws Exception {
+        //GIVEN
+
+        //WHEN &THEN
+        mockMvc.perform(get("/api/movie/123456"))
+                .andExpect(status().is(200))
+                .andExpect(content().string("""
+                        [{"id":"456","title":"Star Wars - The empire strikes back","posterURL":"https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg","year":"1980"}]"""));
+    }
 }

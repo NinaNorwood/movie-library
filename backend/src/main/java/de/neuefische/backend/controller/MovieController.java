@@ -6,7 +6,6 @@ import de.neuefische.backend.service.MovieService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -25,7 +24,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Movie> getMovieById(@PathVariable String id) {
+    public Movie getMovieById(@PathVariable String id) {
         return movieService.getMovieById(id);
     }
 

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 export default function useMovies() {
 
@@ -15,7 +16,8 @@ export default function useMovies() {
             })
             .then((movies) => {setMovies(movies)
             })
-            .catch(error => {console.error(error)})
+            .catch(error => toast.error(error.message))
+            //.catch({console.error(error)})
     }
 
     const addMovies = (title:string, posterURL:string, year:string) => {
@@ -25,9 +27,11 @@ export default function useMovies() {
             year: year,
         }
         axios.post("/api/movie/", newMovie)
-            .then((response) => {return response.data
-            })
+            .then (() => toast.success("Movie added successfully!"))
+          //  .then((response) => {return response.data})
+            .catch(error => toast.error(error.message))
             .then(getMovies)
+
     }
 
     const deleteMovie = (id: string) => {

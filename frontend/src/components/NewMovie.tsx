@@ -17,7 +17,7 @@ export default function NewMovie(props : NewMovieProps) {
         setPosterUrl(event.target.value)
     }
     const onYearChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setYear(event.target.value)
+        setYear(event.target.value);
     }
 
     return (
